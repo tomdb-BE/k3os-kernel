@@ -1,9 +1,9 @@
 ARG APT_GCC=library/gcc:9.2
 
-FROM library/ubuntu:focal AS focal
+FROM library/ubuntu:impish AS impish
 ARG DOWNLOADS=/usr/src/downloads
-ARG LINUX_FIRMWARE=linux-firmware=1.187.25
-ARG LINUX_SOURCE=linux-source-5.4.0=5.4.0-97.110
+ARG LINUX_FIRMWARE=linux-firmware=1.201.3
+ARG LINUX_SOURCE=linux-source-5.13.0=5.13.0.28.38
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN set -x \
@@ -21,7 +21,7 @@ ARG DOWNLOADS=/usr/src/downloads
 ARG WG_URL="https://git.zx2c4.com"
 ARG WG_REPO="wireguard-linux-compat"
 ARG WG_TAG=v1.0.20211208
-COPY --from=focal ${DOWNLOADS}/ ${DOWNLOADS}/
+COPY --from=impish ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt-get update \
  && apt-get install -y \
     kernel-wedge \
